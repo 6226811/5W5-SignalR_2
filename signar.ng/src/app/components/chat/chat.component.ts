@@ -8,11 +8,14 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 // On doit commencer par ajouter signalr dans les node_modules: npm install @microsoft/signalr
 // Ensuite on inclut la librairie
 import * as signalR from "@microsoft/signalr"
+import { MatRadioModule } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  imports: [MatRadioModule, FormsModule]
 })
 export class ChatComponent  {
 
@@ -38,7 +41,7 @@ export class ChatComponent  {
   connectToHub() {
     // On commence par créer la connexion vers le Hub
     this.hubConnection = new signalR.HubConnectionBuilder()
-                              .withUrl('http://localhost:5106/chat', { accessTokenFactory: () => sessionStorage.getItem("token")! })
+                              .withUrl('http://localhost:7060/chat', { accessTokenFactory: () => sessionStorage.getItem("token")! })
                               .build();
 
     // On peut commencer à écouter pour les messages que l'on va recevoir du serveur
